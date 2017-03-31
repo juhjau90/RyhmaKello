@@ -38,6 +38,8 @@ public class HavaitseViiva implements Behavior {
 		
 		lannista = false;
 		
+		pilot.setRotateSpeed(45);
+		
 		// LCD.drawInt(light.getLightValue(), 0, 0);
 		
 		if (light.getLightValue() < black) {
@@ -52,6 +54,13 @@ public class HavaitseViiva implements Behavior {
 			
 		}
 		
+	}
+	
+	public boolean Musta() {
+		if(light.getLightValue() < black){
+			return true;
+		}
+		return false;
 	}
 
 }

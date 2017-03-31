@@ -12,6 +12,7 @@ public class HuomaaSeina implements Behavior {
 	private UltrasonicSensor kaiku;
 	private boolean lannista = false;
 	private DifferentialPilot pilot;
+	private boolean Seina;
 	
 	public HuomaaSeina(SensorPort port, DifferentialPilot pilot){
 		kaiku = new UltrasonicSensor(port);
@@ -19,7 +20,7 @@ public class HuomaaSeina implements Behavior {
 	}
 	
 	public boolean takeControl() {
-		return kaiku.getDistance() < 15;
+		return kaiku.getDistance() < 22;
 	}
 	
 	public void suppress() {
@@ -28,43 +29,41 @@ public class HuomaaSeina implements Behavior {
 	
 	public void action() {
 		
-		lannista = false;
+		if(Seina){
+			pilot.stop();
+			Button.waitForAnyPress();
+		}
 		
-		// boolean isBlocked = true;
-
-		// kun este -> käänny
-		// lue uudestaan onko estettä
-		// jos este -> käänny
-		// jos ei -> eteen
-		
-		pilot.setRotateSpeed(45);
+		if(!Seina){
+			lannista = false;
+			
+			// boolean isBlocked = true;
 	
-		pilot.rotate(-60);
+			// kun este -> käänny
+			// lue uudestaan onko estettä
+			// jos este -> käänny
+			// jos ei -> eteen
+			
+			pilot.setRotateSpeed(90);
 		
-		pilot.forward();
-		Delay.msDelay(2500);
-		
-		pilot.rotate(100);	
-		
-		/* 
-		while (isBlocked == true) { // looppi testaa onko este vielä edessä
-				
-			if (kaiku.getDistance() < 40) {
-				
-				pilot.rotateRight();
-				
+			pilot.rotate(-55);
+			
+			pilot.forward();
+			Delay.msDelay(2500);
+			
+			pilot.rotate(95);
+			
+			HavaitseViiva mustaArvo = new HavaitseViiva(SensorPort.S4, pilot);
+			Seina = true;
+			
+			while(!mustaArvo.Musta()){
+				pilot.forward();
 			}
 			
-			if (kaiku.getDistance() > 40) {
-				
-				isBlocked = false;
-
+			while( Motor.B.isMoving() && !lannista ){
+				Thread.yield();
 			}
 		}
-		*/
 		
-		while( Motor.B.isMoving() && !lannista ){
-			Thread.yield();
-		}
 	}
 }

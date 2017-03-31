@@ -13,7 +13,9 @@ public class PaaLuokka {
 	public static void main (String[] args) {
 		
 		DifferentialPilot pilot = new DifferentialPilot(5.6f,11f,Motor.A, Motor.B, false);
-		pilot.setTravelSpeed(10);
+		pilot.setTravelSpeed(12);
+		//pilot.setAcceleration(180);
+		pilot.setRotateSpeed(45);
 
 		LCD.drawString("    |   -----", 0, 0);
 		LCD.drawString("    |   |", 0, 1);
@@ -32,6 +34,7 @@ public class PaaLuokka {
 		Arbitrator arby = new Arbitrator(taulu);
 		
 		Button.waitForAnyPress();
+		
 		arby.start();
 	}
 }
