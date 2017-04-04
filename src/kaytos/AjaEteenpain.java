@@ -1,6 +1,5 @@
 package kaytos;
 
-import lejos.nxt.*;
 import lejos.robotics.subsumption.*;
 import lejos.robotics.navigation.DifferentialPilot;
 
