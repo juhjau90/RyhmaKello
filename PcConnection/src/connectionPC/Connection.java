@@ -7,7 +7,6 @@ import lejos.pc.comm.NXTConnector;
 
 public class Connection {
 	
-	
 	private NXTConnector conn = new NXTConnector();
 	private DataOutputStream out;
 	
@@ -23,12 +22,17 @@ public class Connection {
 
 	public void sendPC_Data(int i) {
 		try {
-			if (i > 0 && i < 3) {
-
+			
+			if (i > 9 && i < 16) {
 				out.writeInt(i);
 			}
-				out.flush();
-			} catch (IOException ex) {
-			}
+			
+			out.flush();
+			out.close();
+			} 
+		
+		catch (IOException ex) {
+			
 		}
+	}
 }

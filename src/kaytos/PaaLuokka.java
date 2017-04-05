@@ -13,10 +13,11 @@ public class PaaLuokka {
 	
 	public static void main (String[] args) {
 		
-		// Connection conn = new Connection();
+		Connection conn = new Connection();
+		
 		
 		DifferentialPilot pilot = new DifferentialPilot(5.6f,11f,Motor.A, Motor.B, false);
-		pilot.setTravelSpeed(11);
+		pilot.setTravelSpeed(conn.getNopeus());
 		//pilot.setAcceleration(180);
 		pilot.setRotateSpeed(45);
 		

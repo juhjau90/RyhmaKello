@@ -103,13 +103,13 @@ public class GUI extends javax.swing.JFrame {
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-    	con.sendPC_Data(1);
+    	con.sendPC_Data(10);
     	jTextField1.setText("Asetus 1 käytössä");
     	
     }                                        
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
-    	con.sendPC_Data(2);
+    	con.sendPC_Data(15);
     	jTextField1.setText("Asetus 2 käytössä");
     }                                        
 
