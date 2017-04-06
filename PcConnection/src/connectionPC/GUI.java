@@ -9,7 +9,7 @@ package connectionPC;
  *
  * @author ryhma1
  */
-public class GUI extends javax.swing.JFrame {
+public class GUI extends javax.swing.JFrame { //Luokka jolla muotoilaan käyttöliittymä
 
     /**
      * Creates new form GUI
@@ -25,7 +25,7 @@ public class GUI extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents() {
+    private void initComponents() { //Metodi joka määrittelee käyttöliittymän elementit
 
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -94,23 +94,38 @@ public class GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
     
-    	Connection con;
+    Connection con; //Muuttuja jolla luodaan yhteys robottiin
+    boolean sended; //Boolean jolla tarkaillaan onko arvoja jo syötetty
     	
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {  //Kun yhdistä nappia painetaan, yritetään luoda robottiin yhteys                                     
     	con = new Connection();
         con.Connect();
-        jTextField1.setText("Yhdistetty");
+        if (!con.getConnected()) {
+        	jTextField1.setText("Robottiin yhdistäminen epäonnistui.");
+        } else {
+        	jTextField1.setText("Yhdistetty");
+        }
     }                                        
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-    	con.sendPC_Data(10);
-    	jTextField1.setText("Asetus 1 käytössä");
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {  //Kun "Asetus 1" nappia painetaan, robotille säädetään nopeudeksi 10                                      
     	
+    	if (!sended) { //jos "sended" on false, dataa lähetetään mutta muussa tapauksessa ei
+    		con.sendPC_Data(10);
+    		jTextField1.setText("Asetus 1 käytössä");    		
+    		sended = true; 
+    	} else {
+    		jTextField1.setText("Robotille on jo lähetetty dataa.");
+    	}
     }                                        
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
-    	con.sendPC_Data(15);
-    	jTextField1.setText("Asetus 2 käytössä");
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) { //Kun "Asetus 2" nappia painetaan, robotille säädetään nopeudeksi 15
+    	if (!sended) {
+    		con.sendPC_Data(15);
+    		jTextField1.setText("Asetus 2 käytössä");
+    		sended = true;
+    	} else {
+    		jTextField1.setText("Robotille on jo lähetetty dataa");    		
+    	}
     }                                        
 
     /**

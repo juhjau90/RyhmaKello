@@ -5,22 +5,29 @@ import java.io.IOException;
 
 import lejos.pc.comm.NXTConnector;
 
-public class Connection {
+public class Connection { 
 	
 	private NXTConnector conn = new NXTConnector();
 	private DataOutputStream out;
+	private boolean connected;
 	
-	public void Connect() {
-		boolean connected = conn.connectTo("usb://");
+	public boolean getConnected() {
+		return connected;
+	}
+	
+	public void Connect() { 
+		connected = conn.connectTo("usb://");
 		if (!connected) {
+			
 			System.err.println("failed");
-			System.exit(1);
+		} else {
+			
+			out = new DataOutputStream(conn.getOutputStream());
 		}
 		
-		out = new DataOutputStream(conn.getOutputStream());
 	}
 
-	public void sendPC_Data(int i) {
+	public void sendPC_Data(int i) { //Metodi joka hoitelee PC:llä syötettyjen arvojen viennin robottiin 
 		try {
 			
 			if (i > 9 && i < 16) {
