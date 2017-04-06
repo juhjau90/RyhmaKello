@@ -4,10 +4,9 @@ import java.io.DataInputStream;
 // import java.io.DataOutputStream;
 import lejos.nxt.comm.USB;
 import lejos.nxt.comm.USBConnection;
-import lejos.nxt.Button;
 import lejos.nxt.LCD;
 
-public class Connection {
+public class Connection { //Luokka jota k‰ytet‰‰n yhteyden luomiseen ja yhteysasetuksien m‰‰ritykseen
 	
 	public USBConnection usbc;
 	// public DataOutputStream out;

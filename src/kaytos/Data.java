@@ -2,11 +2,9 @@ package kaytos;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-
-import lejos.nxt.Button;
 import lejos.util.Delay;
 
-public class Data {
+public class Data { //Luokka jolla määritettän PC:ltä syötettävän datan tyyppi ja viive
 
 	int lData;
 	

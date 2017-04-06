@@ -7,29 +7,26 @@ import lejos.nxt.SensorPort;
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
 import lejos.robotics.navigation.DifferentialPilot;
+import lejos.util.Delay;
 import lejos.util.Stopwatch;
 
 public class PaaLuokka {
 	
 	public static void main (String[] args) {
 		
+		// luodaan yhteys laitteeseen
 		Connection conn = new Connection();
 		
-		
+		// alustetaan pilotti
 		DifferentialPilot pilot = new DifferentialPilot(5.6f,11f,Motor.A, Motor.B, false);
+		
+		// travelspeedi on tietokoneelta saatu intti
 		pilot.setTravelSpeed(conn.getNopeus());
-		//pilot.setAcceleration(180);
 		pilot.setRotateSpeed(45);
 		
-		LCD.drawString("    |   -----", 0, 0);
-		LCD.drawString("    |   |", 0, 1);
-		LCD.drawString("    |   |", 0, 2);
-		LCD.drawString("    |---+---|", 0, 3);
-		LCD.drawString("        |   |", 0, 4);
-		LCD.drawString("        |   |", 0, 5);
-		LCD.drawString("    -----   |", 0, 6);
-		
+		// luodaan sekuntikello
 		Stopwatch sw = new Stopwatch();
+		
 		
 		Behavior osa1 = new AjaEteenpain(pilot);
 		Behavior osa2 = new HuomaaSeina(SensorPort.S1, pilot, sw);
@@ -37,12 +34,14 @@ public class PaaLuokka {
 		
 		Behavior [] taulu = {osa1, osa2, osa3};
 		
-		Arbitrator arby = new Arbitrator(taulu);
+		Arbitrator arby = new Arbitrator(taulu); //Arbitrator seulaa olioita l‰pi
 		
 		Button.waitForAnyPress();
 		
+		Delay.msDelay(5000); // 5 sec viive
+		
 		sw.reset();
 		
-		arby.start();
+		arby.start(); //Arbitrator olio ja sen toiminta k‰ynnistet‰‰n
 	}
 }

@@ -3,7 +3,7 @@ package kaytos;
 import lejos.robotics.subsumption.*;
 import lejos.robotics.navigation.DifferentialPilot;
 
-public class AjaEteenpain implements Behavior {
+public class AjaEteenpain implements Behavior { //Luokka joka hoitaa robotin eteenpäin liikkumisen
 	
 	//Akselileveys 4.75" tai 121mm
 	
